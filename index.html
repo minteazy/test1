@@ -4,9 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mint Eazy</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FFA500; /* Оранжевий фон */
+            color: #fff; /* Білий текст */
+        }
+        h1, h2, h3, h4 {
+            font-weight: 600;
+        }
+        section {
+            margin-top: 50px;
+        }
+        #timer {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+        .content-section {
+            background-color: #fff;
+            color: #000;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 50px;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+        }
+    </style>
+
+    <!-- Script for Timer -->
+    <script>
+        function startCountdown() {
+            var now = new Date();
+            var target = new Date();
+            target.setHours(8, 0, 0, 0); // 8:00 AM Alberta Time
+
+            if (now > target) {
+                target.setDate(target.getDate() + 1); // Якщо поточний час більше 8 ранку, то ціль на наступний день
+            }
+
+            var countdownInterval = setInterval(function() {
+                var now = new Date();
+                var distance = target - now;
+
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById("timer").innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
+
+                if (distance < 0) {
+                    clearInterval(countdownInterval);
+                    document.getElementById("timer").innerHTML = "Unlocked!";
+                }
+            }, 1000);
+        }
+    </script>
 </head>
-<body>
+<body onload="startCountdown()">
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
@@ -17,13 +81,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="overview.html">Project Overview</a>
+                        <a class="nav-link" href="#overview">Project Overview</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="tokenomics.html">Tokenomics</a>
+                        <a class="nav-link" href="#tokenomics">Tokenomics</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="roadmap.html">Roadmap</a>
+                        <a class="nav-link" href="#roadmap">Roadmap</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="training.html">Training</a>
@@ -37,20 +101,54 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="bg-primary text-white text-center py-5">
+    <section class="text-center py-5">
         <div class="container">
             <h1>Welcome to Mint Eazy</h1>
             <p class="lead">Bringing your ideas to life in the world of crypto</p>
-            <a href="overview.html" class="btn btn-light btn-lg">Learn More</a>
+            <a href="#overview" class="btn btn-light btn-lg">Learn More</a>
+        </div>
+    </section>
+
+    <!-- Timer Section -->
+    <section class="text-center py-5">
+        <div class="container">
+            <h2>Countdown to the next unlocking of 10,000 MEZY</h2>
+            <div id="timer"></div>
+        </div>
+    </section>
+
+    <!-- Project Overview Section -->
+    <section id="overview" class="content-section">
+        <div class="container">
+            <h2>Project Overview</h2>
+            <p>Mint Eazy is a revolutionary platform designed to help people with big ideas and projects but limited financial resources...</p>
+        </div>
+    </section>
+
+    <!-- Tokenomics Section -->
+    <section id="tokenomics" class="content-section">
+        <div class="container">
+            <h2>Tokenomics</h2>
+            <p>The MEZY token is designed to ensure stability, prevent manipulation, and provide access to educational materials...</p>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section id="roadmap" class="content-section">
+        <div class="container">
+            <h2>Roadmap</h2>
+            <p>Our roadmap is designed to take Mint Eazy to the next level. Here are the key milestones for the project...</p>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-light text-center py-4">
+    <footer class="text-center py-4">
         <div class="container">
             <p>© 2024 Mint Eazy. All rights reserved.</p>
-            <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
         </div>
     </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
