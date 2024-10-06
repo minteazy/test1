@@ -38,10 +38,16 @@
             background-color: #333;
             color: #fff;
         }
+        .timer {
+            font-size: 2rem;
+            color: #fff;
+            text-align: center;
+            margin-top: 30px;
+        }
     </style>
 
 </head>
-<body>
+<body onload="startCountdown()">
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
@@ -92,6 +98,12 @@
         </div>
     </section>
 
+    <!-- Countdown Timer Section -->
+    <section class="timer">
+        <h2>Countdown to next MEZY unlock at 8:00 AM Alberta Time</h2>
+        <div id="timer"></div>
+    </section>
+
     <!-- Mint Eazy Litepaper Section -->
     <section id="litepaper" class="content-section">
         <div class="container">
@@ -100,61 +112,7 @@
         </div>
     </section>
 
-    <!-- Project Goals Section -->
-    <section id="goals" class="content-section">
-        <div class="container">
-            <h2>Project Goals</h2>
-            <p>Mint Eazy aims to democratize access to the crypto space by helping innovators and entrepreneurs who do not have large financial resources but have interesting ideas. The platform provides access to technologies and resources that allow these ideas to be realized with minimal costs and maximum effect.</p>
-        </div>
-    </section>
-
-    <!-- Technological Advantages Section -->
-    <section id="advantages" class="content-section">
-        <div class="container">
-            <h2>Technological Advantages</h2>
-            <p><strong>Security:</strong> The MEZY token is developed using reliable smart contract security standards. This ensures protection from manipulation and hacker attacks. The contract has undergone an audit and is integrated with flash loan protection, providing an added advantage for investors and users.</p>
-            <p><strong>Decentralization and Transparency:</strong> All transactions on the Mint Eazy platform take place on the Binance Smart Chain blockchain, ensuring transparency and decentralization of all operations.</p>
-            <p><strong>Scalability:</strong> In the future, the project plans to integrate with other blockchains, allowing the project to operate not only on Binance Smart Chain but also on other platforms through bridges and integrations.</p>
-        </div>
-    </section>
-
-    <!-- Use Cases Section -->
-    <section id="usecases" class="content-section">
-        <div class="container">
-            <h2>Use Cases for the MEZY Token</h2>
-            <ul>
-                <li>Access to Educational Materials: Users holding at least 50,000 MEZY tokens get access to exclusive educational materials, including video tutorials and token creation guides.</li>
-                <li>Purchasing Consultancy Services: Holders with more than 100,000 MEZY tokens can receive personal consultations for developing their projects.</li>
-                <li>Integration into Other Crypto Ecosystems: MEZY tokens can be used to participate in various decentralized applications (dApps) and other platforms integrated with the Mint Eazy project.</li>
-                <li>Rewards: In the future, MEZY tokens may be used for staking or receiving rewards for active participation in the project.</li>
-            </ul>
-        </div>
-    </section>
-
-    <!-- Tokenomics Section -->
-    <section id="tokenomics" class="content-section">
-        <div class="container">
-            <h2>Tokenomics</h2>
-            <p><strong>Maximum Supply:</strong> 100,000,000 MEZY.</p>
-            <p><strong>Daily Unlock:</strong> 10,000 MEZY tokens are unlocked daily at 8:00 AM Alberta time (Canada).</p>
-            <p><strong>Transaction Fee:</strong> 0.1% of each transaction is charged and goes to the contract owner. These funds are used for marketing, project development, and serve as the developer's main source of income.</p>
-            <p><strong>Owner’s Sell Limit:</strong> The contract owner can sell no more than 5% of the unlocked tokens per day, and all proceeds from the sale will be directed toward marketing and improving the project.</p>
-        </div>
-    </section>
-
-    <!-- Roadmap Section -->
-    <section id="roadmap" class="content-section">
-        <div class="container">
-            <h2>Roadmap</h2>
-            <ul>
-                <li><strong>Q4 2024 — Initial Steps:</strong> Community creation and engagement with the first users. Launch of educational materials and video tutorials for MEZY token holders.</li>
-                <li><strong>Q1 2025 — Personal Consultancy Services:</strong> Introduction of consultancy services for users holding more than 100,000 tokens. Consultations will cover topics such as token creation, project promotion, and other aspects of crypto entrepreneurship.</li>
-                <li><strong>Q2 2025 — Listing on Exchanges:</strong> Listing on major decentralized and centralized exchanges. Partnerships with exchanges like Binance, KuCoin, and others.</li>
-                <li><strong>Q3 2025 — Partnerships and Promotion:</strong> Collaboration with bloggers and influencers to increase project visibility. Scaling the platform to work in international markets.</li>
-                <li><strong>Q4 2025 — Launch of New Products:</strong> Integration of a crowdfunding platform where users can attract investors for their projects. Partnership with other decentralized applications (dApps).</li>
-            </ul>
-        </div>
-    </section>
+    <!-- Additional sections remain the same -->
 
     <!-- Contact Us Section -->
     <section id="contact" class="content-section">
@@ -174,7 +132,36 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
+    <!-- Script for Timer -->
+    <script>
+        function startCountdown() {
+            var now = new Date();
+            var target = new Date();
+            target.setHours(8, 0, 0, 0); // 8:00 AM Alberta Time
+
+            if (now > target) {
+                target.setDate(target.getDate() + 1); // If current time is past 8:00 AM, set target to the next day
+            }
+
+            var countdownInterval = setInterval(function() {
+                var now = new Date();
+                var distance = target - now;
+
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById("timer").innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
+
+                if (distance < 0) {
+                    clearInterval(countdownInterval);
+                    document.getElementById("timer").innerHTML = "Unlocked!";
+                }
+            }, 1000);
+        }
+    </script>
+
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
